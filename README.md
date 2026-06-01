@@ -1,14 +1,14 @@
 # Self Management System
 
-A full-stack self-management platform built with Spring Boot and Vue 3.
+A full-stack self-management platform built with Spring Boot, PostgreSQL, and Vue 3.
 
 It combines personal planning, finance records, focus tracking, exam planning, course management, weight records, and user administration in one project.
 
 ## Preview
 
 - Frontend: `Vue 3 + Vite + Element Plus + ECharts`
-- Backend: `Spring Boot 3 + MyBatis-Plus + MySQL`
-- Database script: `student.sql`
+- Backend: `Spring Boot 3 + MyBatis-Plus + PostgreSQL`
+- Database scripts: `student.sql` and `student_postgres.sql`
 
 ## Main Features
 
@@ -47,23 +47,23 @@ It combines personal planning, finance records, focus tracking, exam planning, c
 
 - Spring Boot 3
 - MyBatis-Plus
-- MySQL
+- PostgreSQL
 - Maven
 
 ## Quick Start
 
 ### 1. Prepare database
 
-Create a MySQL database and import the SQL file:
+Create a PostgreSQL database:
 
 ```sql
-student_management_db
+CREATE DATABASE student_management_db;
 ```
 
-Import:
+Import the PostgreSQL script:
 
-```text
-student.sql
+```bash
+psql -U postgres -d student_management_db -f student_postgres.sql
 ```
 
 ### 2. Configure backend
@@ -73,9 +73,9 @@ Edit [application.yml](</D:/新建文件夹 (2)/弓/self-management/self-managem
 ```yml
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/student_management_db?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false
-    username: your_mysql_username
-    password: your_mysql_password
+    url: jdbc:postgresql://localhost:5432/student_management_db
+    username: postgres
+    password: your_postgres_password
 ```
 
 ### 3. Run backend
@@ -124,6 +124,8 @@ http://localhost:5173
 - Real database credentials have been removed from the public repository
 - Build outputs such as `node_modules` and `target` are ignored
 - Backend now supports container deployment through `self-management/self-management/Dockerfile`
+- The project has been migrated to PostgreSQL for free-hosting compatibility
+- Use `student_postgres.sql` for PostgreSQL environments
 
 ## Current Release Mode
 
@@ -140,7 +142,7 @@ Online preview:
 To use the full system with login, CRUD, and charts:
 
 1. Start your local MySQL service
-2. Import `student.sql` into `student_management_db`
+2. Import `student_postgres.sql` into `student_management_db`
 3. Start the backend on `http://localhost:8080`
 4. Open the frontend locally with `npm run dev`
 
@@ -149,6 +151,15 @@ Important:
 - The published GitHub Pages frontend is for public preview
 - Full data operations depend on your local backend and local database
 - If you want a fully online system later, you will need a paid or externally hosted backend/database
+
+## Free Hosting Path
+
+To move this project toward a fully free online deployment:
+
+1. Deploy the backend as a free web service
+2. Use a free PostgreSQL instance
+3. Set `DB_URL`, `DB_USERNAME`, and `DB_PASSWORD` on the backend host
+4. Set `VITE_API_BASE_URL` on the frontend host to your deployed backend URL
 
 ## Repository
 
