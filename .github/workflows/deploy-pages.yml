@@ -36,6 +36,8 @@ jobs:
         run: npm ci
 
       - name: Build site
+        env:
+          VITE_PUBLIC_BASE: /self-management-system/
         run: npm run build
 
       - name: Upload Pages artifact
