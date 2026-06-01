@@ -97,7 +97,7 @@ const handleAvatarChange = (file) => {
     
     try {
       // 直接调用原有的更新资料接口，把头像字符串存进去
-      const response = await axios.put('http://localhost:8080/user/update', {
+      const response = await axios.put('/user/update', {
         id: currentUser.value.id,
         avatar: base64Image
       })
@@ -125,7 +125,7 @@ const openEditDialog = () => {
 const saveProfile = async () => {
   if (!editForm.value.nickname) return ElMessage.warning('昵称不能为空！')
   try {
-    const response = await axios.put('http://localhost:8080/user/update', editForm.value)
+    const response = await axios.put('/user/update', editForm.value)
     if (response.data.code === 200) {
       ElMessage.success('资料修改成功！')
       localStorage.setItem('user', JSON.stringify(editForm.value))
@@ -148,7 +148,7 @@ const savePassword = async () => {
   }
 
   try {
-    const response = await axios.put('http://localhost:8080/user/password', {
+    const response = await axios.put('/user/password', {
       id: currentUser.value.id,
       oldPassword: pwdForm.value.oldPassword,
       newPassword: pwdForm.value.newPassword

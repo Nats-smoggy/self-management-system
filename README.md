@@ -91,6 +91,15 @@ Backend URL:
 http://localhost:8080
 ```
 
+Backend environment variables for cloud deployment:
+
+```text
+PORT
+DB_URL
+DB_USERNAME
+DB_PASSWORD
+```
+
 ### 4. Run frontend
 
 ```bash
@@ -114,6 +123,7 @@ http://localhost:5173
 
 - Real database credentials have been removed from the public repository
 - Build outputs such as `node_modules` and `target` are ignored
+- Backend now supports container deployment through `self-management/self-management/Dockerfile`
 
 ## Repository
 
