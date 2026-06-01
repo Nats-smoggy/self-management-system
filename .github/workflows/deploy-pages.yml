@@ -37,6 +37,7 @@ jobs:
 
       - name: Build site
         env:
+          VITE_API_BASE_URL: https://self-management-system-api.onrender.com
           VITE_PUBLIC_BASE: /self-management-system/
         run: npm run build
 
