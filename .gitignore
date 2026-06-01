@@ -1,0 +1,17 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml
+
+# Logs
+*.log
+
+# Frontend
+self-management-ui/node_modules/
+self-management-ui/dist/
+
+# Backend
+self-management/self-management/target/
+
