@@ -161,6 +161,27 @@ To move this project toward a fully free online deployment:
 3. Set `DB_URL`, `DB_USERNAME`, and `DB_PASSWORD` on the backend host
 4. Set `VITE_API_BASE_URL` on the frontend host to your deployed backend URL
 
+### Render Setup
+
+Backend web service:
+
+- Root directory: `self-management/self-management`
+- Build command: `./mvnw -DskipTests package`
+- Start command: `java -jar target/self-management-0.0.1-SNAPSHOT.jar`
+
+Frontend static site:
+
+- Root directory: `self-management-ui`
+- Build command: `npm install && npm run build`
+- Publish directory: `dist`
+- Environment variable: `VITE_API_BASE_URL=<your-backend-url>`
+
+Database:
+
+- Create a free PostgreSQL database on Render
+- Set backend `DB_URL`, `DB_USERNAME`, and `DB_PASSWORD` from that Render database
+- The backend will auto-run `schema.sql` and `data.sql` on startup
+
 ## Repository
 
 - GitHub: [Nats-smoggy/self-management-system](https://github.com/Nats-smoggy/self-management-system)
