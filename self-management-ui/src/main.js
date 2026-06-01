@@ -7,11 +7,7 @@ import axios from 'axios'
 
 const app = createApp(App)
 
-const apiBaseUrl =
-  import.meta.env.VITE_API_BASE_URL ||
-  (window.location.hostname === 'localhost'
-    ? 'http://localhost:8080'
-    : 'https://2dd88073.r3.cpolar.cn')
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'
 
 axios.defaults.baseURL = apiBaseUrl
 

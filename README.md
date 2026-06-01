@@ -125,6 +125,31 @@ http://localhost:5173
 - Build outputs such as `node_modules` and `target` are ignored
 - Backend now supports container deployment through `self-management/self-management/Dockerfile`
 
+## Current Release Mode
+
+This project is currently released in a half-published mode:
+
+- Public frontend page is available online for preview
+- Backend runs locally on your own computer
+- Database runs locally on your own MySQL service
+
+Online preview:
+
+- Frontend: [https://nats-smoggy.github.io/self-management-system/](https://nats-smoggy.github.io/self-management-system/)
+
+To use the full system with login, CRUD, and charts:
+
+1. Start your local MySQL service
+2. Import `student.sql` into `student_management_db`
+3. Start the backend on `http://localhost:8080`
+4. Open the frontend locally with `npm run dev`
+
+Important:
+
+- The published GitHub Pages frontend is for public preview
+- Full data operations depend on your local backend and local database
+- If you want a fully online system later, you will need a paid or externally hosted backend/database
+
 ## Repository
 
 - GitHub: [Nats-smoggy/self-management-system](https://github.com/Nats-smoggy/self-management-system)
