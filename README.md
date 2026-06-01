@@ -1,45 +1,74 @@
 # Self Management System
 
-This repository contains a full-stack self-management system with:
+A full-stack self-management platform built with Spring Boot and Vue 3.
 
-- `self-management/self-management`: Spring Boot backend
-- `self-management-ui`: Vue 3 + Vite frontend
-- `student.sql`: MySQL database initialization script
+It combines personal planning, finance records, focus tracking, exam planning, course management, weight records, and user administration in one project.
 
-## Tech Stack
+## Preview
 
-- Frontend: Vue 3, Vite, Element Plus, Axios, ECharts
-- Backend: Spring Boot 3, MyBatis-Plus, MySQL
+- Frontend: `Vue 3 + Vite + Element Plus + ECharts`
+- Backend: `Spring Boot 3 + MyBatis-Plus + MySQL`
+- Database script: `student.sql`
+
+## Main Features
+
+- User login and registration
+- Personal dashboard and profile center
+- Daily plan management
+- Finance / bookkeeping records
+- Focus session tracking
+- Course schedule management
+- Exam plan management
+- Weight record management
+- Admin user management
 
 ## Project Structure
 
 ```text
 .
 |-- self-management/
-|   `-- self-management/    # backend project
-|-- self-management-ui/     # frontend project
-`-- student.sql             # database schema and seed data
+|   `-- self-management/            # Spring Boot backend
+|-- self-management-ui/             # Vue 3 frontend
+`-- student.sql                     # MySQL schema and sample data
 ```
 
-## Getting Started
+## Tech Stack
 
-### 1. Initialize the database
+### Frontend
 
-Create a MySQL database and import `student.sql`.
+- Vue 3
+- Vite
+- Vue Router
+- Element Plus
+- Axios
+- ECharts
 
-Recommended database name:
+### Backend
+
+- Spring Boot 3
+- MyBatis-Plus
+- MySQL
+- Maven
+
+## Quick Start
+
+### 1. Prepare database
+
+Create a MySQL database and import the SQL file:
 
 ```sql
 student_management_db
 ```
 
-### 2. Configure the backend
+Import:
 
-Edit the backend config file:
+```text
+student.sql
+```
 
-`self-management/self-management/src/main/resources/application.yml`
+### 2. Configure backend
 
-Set your local MySQL username and password:
+Edit [application.yml](</D:/新建文件夹 (2)/弓/self-management/self-management/src/main/resources/application.yml:1>) and replace the database account info with your local values:
 
 ```yml
 spring:
@@ -49,20 +78,20 @@ spring:
     password: your_mysql_password
 ```
 
-### 3. Start the backend
+### 3. Run backend
 
 ```bash
 cd self-management/self-management
 mvnw.cmd spring-boot:run
 ```
 
-Backend default address:
+Backend URL:
 
 ```text
 http://localhost:8080
 ```
 
-### 4. Start the frontend
+### 4. Run frontend
 
 ```bash
 cd self-management-ui
@@ -70,14 +99,22 @@ npm install
 npm run dev
 ```
 
-Frontend default address:
+Frontend URL:
 
 ```text
 http://localhost:5173
 ```
 
-## Notes
+## API Notes
 
-- The published repository does not include real database credentials.
-- `node_modules` and backend `target` build outputs are ignored.
-- Frontend API requests currently target `http://localhost:8080`.
+- The frontend currently calls the backend at `http://localhost:8080`
+- Cross-origin access is enabled in the backend controllers
+
+## Publish Notes
+
+- Real database credentials have been removed from the public repository
+- Build outputs such as `node_modules` and `target` are ignored
+
+## Repository
+
+- GitHub: [Nats-smoggy/self-management-system](https://github.com/Nats-smoggy/self-management-system)
