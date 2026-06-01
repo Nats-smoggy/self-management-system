@@ -1,5 +1,6 @@
 INSERT INTO sys_user (id, username, password, nickname, role, status)
 VALUES
+  (1, 'admin', 'admin123', 'system-admin', 'ADMIN', 1),
   (4, 'test01', '123456', 'test01', 'USER', 1),
   (5, '807968335', '12345', 'user807968335', 'USER', 1),
   (12, 'asd123', 'g021166', 'gfs', 'USER', 1)

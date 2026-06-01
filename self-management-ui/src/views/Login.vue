@@ -130,13 +130,15 @@ const handleLogin = () => {
         const res = response.data
 
         if (res.code === 200) {
+          const targetPath = res.data?.role === 'ADMIN' ? '/home/admin' : '/home/dashboard'
+
           ElMessage({
             message: `登录成功！欢迎回来，美丽的矿大开拓者！`,
             type: 'success',
             plain: true,
           })
           localStorage.setItem('user', JSON.stringify(res.data))
-          router.push('/home/dashboard')
+          router.push(targetPath)
         } else {
           ElMessage({
             message: res.msg || '密码错误或账号不存在',
