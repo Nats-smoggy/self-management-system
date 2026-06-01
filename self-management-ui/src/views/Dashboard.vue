@@ -6,7 +6,7 @@
     </div>
 
     <el-row :gutter="20" class="kpi-row">
-      <el-col :span="8">
+      <el-col :xs="24" :sm="12" :lg="8">
         <el-card shadow="hover" class="kpi-card glass-card focus-card">
           <div class="kpi-icon">⏱️</div>
           <div class="kpi-info">
@@ -15,7 +15,7 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :span="8">
+      <el-col :xs="24" :sm="12" :lg="8">
         <el-card shadow="hover" class="kpi-card glass-card plan-card">
           <div class="kpi-icon">🎯</div>
           <div class="kpi-info">
@@ -24,7 +24,7 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :span="8">
+      <el-col :xs="24" :sm="24" :lg="8">
         <el-card shadow="hover" class="kpi-card glass-card finance-card">
           <div class="kpi-icon">💰</div>
           <div class="kpi-info">
@@ -36,7 +36,7 @@
     </el-row>
 
     <el-row :gutter="20" class="chart-row">
-      <el-col :span="16">
+      <el-col :xs="24" :lg="16">
         <el-card shadow="hover" class="glass-card chart-card">
           <template #header>
             <div class="chart-header">🔥 近7日专注战斗力趋势</div>
@@ -45,7 +45,7 @@
         </el-card>
       </el-col>
 
-      <el-col :span="8">
+      <el-col :xs="24" :lg="8">
         <el-card shadow="hover" class="glass-card chart-card">
           <template #header>
             <div class="chart-header">📊 目标计划执行分布</div>
@@ -56,7 +56,7 @@
     </el-row>
 
     <el-row :gutter="20" class="chart-row">
-      <el-col :span="24">
+      <el-col :xs="24" :lg="24">
         <el-card shadow="hover" class="glass-card chart-card">
           <template #header>
             <div class="chart-header">💵 历史财务收支复盘</div>
@@ -252,4 +252,42 @@ onUnmounted(() => {
 .chart-box { width: 100%; height: 300px; }
 :deep(.el-card__body) { padding: 15px; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 900px) {
+  .dashboard-container {
+    padding: 8px 4px 20px;
+  }
+
+  .title {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .kpi-card {
+    padding: 18px 16px;
+  }
+
+  .kpi-icon {
+    font-size: 32px;
+    margin-right: 14px;
+    padding: 12px;
+  }
+
+  .kpi-value {
+    font-size: 24px;
+  }
+
+  .chart-header {
+    font-size: 14px;
+  }
+
+  .chart-box {
+    height: 260px;
+  }
+}
 </style>

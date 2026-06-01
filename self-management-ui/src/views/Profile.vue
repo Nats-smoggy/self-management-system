@@ -1,6 +1,6 @@
 <template>
-  <div style="padding: 20px;">
-    <el-card shadow="hover" style="max-width: 500px; margin: 0 auto; border-radius: 15px;">
+  <div class="profile-page">
+    <el-card shadow="hover" class="profile-card">
       
       <div style="text-align: center; padding: 20px 0;">
         <el-upload
@@ -32,13 +32,13 @@
         <el-descriptions-item label="账号注册时间">{{ currentUser.createTime ? currentUser.createTime.replace('T', ' ').substring(0, 19) : '未知' }}</el-descriptions-item>
       </el-descriptions>
       
-      <div style="text-align: center; margin-top: 30px;">
+      <div class="profile-actions">
         <el-button type="danger" plain @click="pwdDialogVisible = true">修改密码</el-button>
         <el-button type="warning" plain @click="openEditDialog">编辑资料</el-button>
       </div>
     </el-card>
 
-    <el-dialog v-model="dialogVisible" title="编辑个人资料" width="30%">
+    <el-dialog v-model="dialogVisible" title="编辑个人资料" :width="dialogWidth">
       <el-form :model="editForm" label-width="80px">
         <el-form-item label="登录账号"><el-input v-model="editForm.username" disabled /></el-form-item>
         <el-form-item label="用户昵称"><el-input v-model="editForm.nickname" placeholder="请输入新昵称" /></el-form-item>
@@ -49,7 +49,7 @@
       </template>
     </el-dialog>
 
-    <el-dialog v-model="pwdDialogVisible" title="修改系统密码" width="30%">
+    <el-dialog v-model="pwdDialogVisible" title="修改系统密码" :width="dialogWidth">
       <el-form :model="pwdForm" label-width="90px">
         <el-form-item label="原密码">
           <el-input v-model="pwdForm.oldPassword" type="password" show-password placeholder="请输入现在的密码" />
@@ -71,7 +71,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
@@ -80,6 +80,7 @@ const router = useRouter()
 
 // 从保险箱拿到当前用户
 const currentUser = ref(JSON.parse(localStorage.getItem('user') || '{}'))
+const dialogWidth = computed(() => (window.innerWidth <= 900 ? '92%' : '30%'))
 
 // ====== 模块一：修改头像 (Base64 魔法) ======
 const handleAvatarChange = (file) => {
@@ -170,6 +171,24 @@ const savePassword = async () => {
 </script>
 
 <style scoped>
+.profile-page {
+  padding: 20px;
+}
+
+.profile-card {
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: 15px;
+}
+
+.profile-actions {
+  text-align: center;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 /* 悬浮修改头像的高级特效 */
 .avatar-container {
   position: relative;
@@ -200,5 +219,15 @@ const savePassword = async () => {
 }
 .avatar-container:hover .edit-mask {
   opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .profile-page {
+    padding: 8px 4px 20px;
+  }
+
+  .profile-card {
+    max-width: 100%;
+  }
 }
 </style>

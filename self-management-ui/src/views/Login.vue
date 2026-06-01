@@ -389,4 +389,29 @@ const handleLogin = () => {
   color: #00F2FE;
   text-decoration: underline;
 }
+
+@media (max-width: 900px) {
+  .login-inner-box {
+    width: min(100%, 100vw);
+    padding: 16px;
+  }
+
+  .modern-light-card {
+    width: 100%;
+    border-radius: 22px;
+  }
+
+  :deep(.el-card__body) {
+    padding: 36px 22px !important;
+  }
+
+  .main-title {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  .en-subtitle {
+    letter-spacing: 1.4px;
+  }
+}
 </style>
