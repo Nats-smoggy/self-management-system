@@ -5,7 +5,67 @@
         <div class="logo-box">
           <span class="logo-text">自我规划大本营</span>
         </div>
-        <AppMenu :current-user="currentUser" :route-path="route.path" />
+        <el-menu
+          router
+          :default-active="route.path"
+          active-text-color="#2563eb"
+          background-color="transparent"
+          text-color="#475569"
+          class="el-menu-vertical"
+        >
+          <el-menu-item index="/home/dashboard">
+            <el-icon><DataLine /></el-icon>
+            <span>数据看板</span>
+          </el-menu-item>
+
+          <el-sub-menu index="study-management">
+            <template #title>
+              <el-icon><Reading /></el-icon>
+              <span class="menu-group-title">学习管理</span>
+            </template>
+            <el-menu-item index="/home/plan">
+              <el-icon><Calendar /></el-icon>
+              <span>目标计划</span>
+            </el-menu-item>
+            <el-menu-item index="/home/course">
+              <el-icon><Document /></el-icon>
+              <span>课程表</span>
+            </el-menu-item>
+            <el-menu-item index="/home/focus">
+              <el-icon><Timer /></el-icon>
+              <span>专注时刻</span>
+            </el-menu-item>
+            <el-menu-item index="/home/exam">
+              <el-icon><Trophy /></el-icon>
+              <span>考试计划</span>
+            </el-menu-item>
+          </el-sub-menu>
+
+          <el-sub-menu index="life-management">
+            <template #title>
+              <el-icon><CoffeeCup /></el-icon>
+              <span class="menu-group-title">生活管理</span>
+            </template>
+            <el-menu-item index="/home/finance">
+              <el-icon><Money /></el-icon>
+              <span>财务账本</span>
+            </el-menu-item>
+            <el-menu-item index="/home/weight">
+              <el-icon><TrendCharts /></el-icon>
+              <span>体重管理</span>
+            </el-menu-item>
+          </el-sub-menu>
+
+          <el-menu-item index="/home/profile">
+            <el-icon><User /></el-icon>
+            <span>个人中心</span>
+          </el-menu-item>
+
+          <el-menu-item v-if="currentUser.role === 'ADMIN'" index="/home/admin" class="admin-entry">
+            <el-icon><Setting /></el-icon>
+            <span>管理员控制台</span>
+          </el-menu-item>
+        </el-menu>
       </div>
     </el-aside>
 
@@ -65,13 +125,74 @@
       <div class="logo-box">
         <span class="logo-text">自我规划大本营</span>
       </div>
-      <AppMenu :current-user="currentUser" :route-path="route.path" @navigate="drawerVisible = false" />
+      <el-menu
+        router
+        :default-active="route.path"
+        active-text-color="#2563eb"
+        background-color="transparent"
+        text-color="#475569"
+        class="el-menu-vertical"
+        @select="drawerVisible = false"
+      >
+        <el-menu-item index="/home/dashboard">
+          <el-icon><DataLine /></el-icon>
+          <span>数据看板</span>
+        </el-menu-item>
+
+        <el-sub-menu index="study-management-mobile">
+          <template #title>
+            <el-icon><Reading /></el-icon>
+            <span class="menu-group-title">学习管理</span>
+          </template>
+          <el-menu-item index="/home/plan">
+            <el-icon><Calendar /></el-icon>
+            <span>目标计划</span>
+          </el-menu-item>
+          <el-menu-item index="/home/course">
+            <el-icon><Document /></el-icon>
+            <span>课程表</span>
+          </el-menu-item>
+          <el-menu-item index="/home/focus">
+            <el-icon><Timer /></el-icon>
+            <span>专注时刻</span>
+          </el-menu-item>
+          <el-menu-item index="/home/exam">
+            <el-icon><Trophy /></el-icon>
+            <span>考试计划</span>
+          </el-menu-item>
+        </el-sub-menu>
+
+        <el-sub-menu index="life-management-mobile">
+          <template #title>
+            <el-icon><CoffeeCup /></el-icon>
+            <span class="menu-group-title">生活管理</span>
+          </template>
+          <el-menu-item index="/home/finance">
+            <el-icon><Money /></el-icon>
+            <span>财务账本</span>
+          </el-menu-item>
+          <el-menu-item index="/home/weight">
+            <el-icon><TrendCharts /></el-icon>
+            <span>体重管理</span>
+          </el-menu-item>
+        </el-sub-menu>
+
+        <el-menu-item index="/home/profile">
+          <el-icon><User /></el-icon>
+          <span>个人中心</span>
+        </el-menu-item>
+
+        <el-menu-item v-if="currentUser.role === 'ADMIN'" index="/home/admin" class="admin-entry">
+          <el-icon><Setting /></el-icon>
+          <span>管理员控制台</span>
+        </el-menu-item>
+      </el-menu>
     </div>
   </el-drawer>
 </template>
 
 <script setup>
-import { computed, defineComponent, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import {
   ArrowDown,
@@ -129,101 +250,6 @@ const handleCommand = (command) => {
     router.push('/home/profile')
   }
 }
-
-const AppMenu = defineComponent({
-  name: 'AppMenu',
-  props: {
-    currentUser: {
-      type: Object,
-      required: true
-    },
-    routePath: {
-      type: String,
-      required: true
-    }
-  },
-  emits: ['navigate'],
-  template: `
-    <div class="menu-wrapper">
-      <el-menu
-        router
-        :default-active="routePath"
-        active-text-color="#2563eb"
-        background-color="transparent"
-        text-color="#475569"
-        class="el-menu-vertical"
-        @select="$emit('navigate')"
-      >
-        <el-menu-item index="/home/dashboard">
-          <el-icon><DataLine /></el-icon>
-          <span>数据看板</span>
-        </el-menu-item>
-
-        <el-sub-menu index="study-management">
-          <template #title>
-            <el-icon><Reading /></el-icon>
-            <span class="menu-group-title">学习管理</span>
-          </template>
-          <el-menu-item index="/home/plan">
-            <el-icon><Calendar /></el-icon>
-            <span>目标计划</span>
-          </el-menu-item>
-          <el-menu-item index="/home/course">
-            <el-icon><Document /></el-icon>
-            <span>课程表</span>
-          </el-menu-item>
-          <el-menu-item index="/home/focus">
-            <el-icon><Timer /></el-icon>
-            <span>专注时刻</span>
-          </el-menu-item>
-          <el-menu-item index="/home/exam">
-            <el-icon><Trophy /></el-icon>
-            <span>考试计划</span>
-          </el-menu-item>
-        </el-sub-menu>
-
-        <el-sub-menu index="life-management">
-          <template #title>
-            <el-icon><CoffeeCup /></el-icon>
-            <span class="menu-group-title">生活管理</span>
-          </template>
-          <el-menu-item index="/home/finance">
-            <el-icon><Money /></el-icon>
-            <span>财务账本</span>
-          </el-menu-item>
-          <el-menu-item index="/home/weight">
-            <el-icon><TrendCharts /></el-icon>
-            <span>体重管理</span>
-          </el-menu-item>
-        </el-sub-menu>
-
-        <el-menu-item index="/home/profile">
-          <el-icon><User /></el-icon>
-          <span>个人中心</span>
-        </el-menu-item>
-
-        <el-menu-item v-if="currentUser.role === 'ADMIN'" index="/home/admin" class="admin-entry">
-          <el-icon><Setting /></el-icon>
-          <span>管理员控制台</span>
-        </el-menu-item>
-      </el-menu>
-    </div>
-  `,
-  components: {
-    ArrowDown,
-    Calendar,
-    CoffeeCup,
-    DataLine,
-    Document,
-    Money,
-    Reading,
-    Setting,
-    Timer,
-    TrendCharts,
-    Trophy,
-    User
-  }
-})
 </script>
 
 <style scoped>
@@ -261,7 +287,7 @@ const AppMenu = defineComponent({
   letter-spacing: 0.04em;
 }
 
-.menu-wrapper {
+.el-menu-vertical {
   padding: 14px 10px 18px;
 }
 
